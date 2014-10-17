@@ -26,4 +26,18 @@ public class lista{
     		fin = nuevo;
     	}
 	}
+
+	public void EliminarInicio()
+	{
+		inicio = inicio.siguiente;
+	}
+
+	public String ExtraerInicio(){
+		String info = inicio.getInfo();
+		inicio = inicio.getSiguiente();
+		if(inicio == null)
+			fin = null;
+		return info;
+	}
+	
 } 
