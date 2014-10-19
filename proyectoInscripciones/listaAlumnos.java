@@ -1,9 +1,9 @@
 public class listaAlumnos{ 
 	Nodo inicio;
 	Nodo fin;
-
+//se declaran nodos basicos inicial y final
 	public listaAlumnos{
-		inicio = fin = null;
+		inicio = fin = null; //contructor de la lista de alumnos
 	}
 	//Los arreglos enviados seran de 
 	//tipo string
@@ -13,7 +13,9 @@ public class listaAlumnos{
     	if (fin == null) 
     		fin = inicio;
     }
-
+//los metodos ya estan listos para implementarse
+//la duda es saber si estoy enviandoles bien el arreglo
+//info    
     public void InsertarAlFinal(String[] info){
     	Nodo nuevo = new Nodo(info, null);
     	if (inicio == null){
