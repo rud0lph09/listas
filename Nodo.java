@@ -1,7 +1,7 @@
 public class Nodo{
 	private String info;
 	Nodo siguiente;
-	public nodo(String i, Nodo s)
+	public Nodo(String i, Nodo s)
 	{
 		info = i;
 		siguiente = s;

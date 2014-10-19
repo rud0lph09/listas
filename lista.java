@@ -15,7 +15,7 @@ public class lista{
     }
 
     public void InsertarAlFinal(String info){
-    	Nodo nuevo = new Nodo(info, fin);
+    	Nodo nuevo = new Nodo(info, null);
     	if (inicio == null){
     		fin = nuevo;
     		inicio = fin;
@@ -39,5 +39,15 @@ public class lista{
 			fin = null;
 		return info;
 	}
+
+    public void Listar()
+    {
+        Nodo temp = inicio;
+        while(temp != null){
+            System.out.println(temp.getInfo());
+            temp = temp.siguiente;
+        }
+
+    }
 	
 } 
