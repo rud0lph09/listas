@@ -1,4 +1,7 @@
+package Proyecto;
+
 public class Principal{
+	
 	public static void main(String[] args) {
 		lista l = new lista();
 		l.InsertarAlInicio("a");
@@ -8,4 +11,5 @@ public class Principal{
 		l.InsertarAlFinal("e");
 		l.Listar();
 	}
+	
 }

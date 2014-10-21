@@ -1,24 +1,38 @@
+package Proyecto;
+
 public class listaAlumnos{ 
+	
+	//Atributos (nodos básicos inicial y final)
 	Nodo inicio;
 	Nodo fin;
-//se declaran nodos basicos inicial y final
-	public listaAlumnos{
-		inicio = fin = null; //contructor de la lista de alumnos
+	
+	//Contructor de la lista de alumnos
+	public listaAlumnos()
+	{
+		inicio = fin = null; 
 	}
-	//Los arreglos enviados seran de 
-	//tipo string
+	
+	
+	//Métodos
 	 public void InsertarAlInicio(String[] info){
     	Nodo nuevo = new Nodo(info, inicio);
     	inicio = nuevo;
     	if (fin == null) 
     		fin = inicio;
     }
+	 
 //los metodos ya estan listos para implementarse
 //la duda es saber si estoy enviandoles bien el arreglo
 //info    
-    public void InsertarAlFinal(String[] info){
-    	Nodo nuevo = new Nodo(info, null);
-    	if (inicio == null){
+	 
+	//Respuesta a lo de arriba: ok, si ya cheque que el problema esta en info. Hay que ver en que falla por 
+	//que ya revisé cada línea del código, y a mi parecer está correcto casi todo. Ahorita también lo revisas
+	 
+    public void InsertarAlFinal(String[] info)
+    {
+    	Nodo nuevo = new Nodo(info,null);
+    	if (inicio == null)
+    	{
     		fin = nuevo;
     		inicio = fin;
     	}
@@ -29,12 +43,15 @@ public class listaAlumnos{
     	}
 	}
 
+    
 	public void EliminarInicio()
 	{
 		inicio = inicio.siguiente;
 	}
 
-	public String ExtraerInicio(){
+	
+	public String ExtraerInicio()
+	{
 		String info = inicio.getInfo();
 		inicio = inicio.getSiguiente();
 		if(inicio == null)
@@ -45,12 +62,14 @@ public class listaAlumnos{
     public void Listar()
     {
         Nodo temp = inicio;
-        while(temp != null){
+        while(temp != null)
+        {
             System.out.println(temp.getInfo());
             temp = temp.siguiente;
         }
 
     }
+    
 }
 
 /*

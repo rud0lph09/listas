@@ -1,22 +1,33 @@
+package Proyecto;
+
 public class lista{
 	
+	//Atributos
 	Nodo inicio;
     Nodo fin;
 
-    public lista(){              //Constructor de lista de nodos
+    //Constructor de lista de nodos
+    public lista()
+    {             
     	inicio = fin = null;
     }
 
-    public void InsertarAlInicio(String info){
+    
+    //Métodos de Inserciones
+    public void InsertarAlInicio(String info)
+    {
     	Nodo nuevo = new Nodo(info, inicio);
     	inicio = nuevo;
     	if (fin == null) 
     		fin = inicio;
     }
 
-    public void InsertarAlFinal(String info){
+    
+    public void InsertarAlFinal(String info)
+    {
     	Nodo nuevo = new Nodo(info, null);
-    	if (inicio == null){
+    	if (inicio == null)
+    	{
     		fin = nuevo;
     		inicio = fin;
     	}
@@ -27,12 +38,15 @@ public class lista{
     	}
 	}
 
+    
 	public void EliminarInicio()
 	{
 		inicio = inicio.siguiente;
 	}
 
-	public String ExtraerInicio(){
+	
+	public String ExtraerInicio()
+	{
 		String info = inicio.getInfo();
 		inicio = inicio.getSiguiente();
 		if(inicio == null)
@@ -40,10 +54,12 @@ public class lista{
 		return info;
 	}
 
+	
     public void Listar()
     {
         Nodo temp = inicio;
-        while(temp != null){
+        while(temp != null)
+        {
             System.out.println(temp.getInfo());
             temp = temp.siguiente;
         }
