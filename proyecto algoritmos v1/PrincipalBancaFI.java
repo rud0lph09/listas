@@ -15,8 +15,8 @@ public class PrincipalBancaFI {
 	
 	
 	
-    int contador=0, cod=1; 									//con esta pariable se lleva el control de los inscritos
-    usuarioBancaFI usuario [] = new usuarioBancaFI[5]; 			//inicializamos el arreglo de objetos usuario
+    int contador=0, id=1; 									//con esta pariable se lleva el control de los inscritos
+    usuarioBancaFI usuario [] = new usuarioBancaFI[100]; 			//inicializamos el arreglo de objetos usuario
     
     //constructor de la clase PrincipalBanco
     public PrincipalBancaFI()
@@ -24,7 +24,7 @@ public class PrincipalBancaFI {
     int opcion;
  
 	do {
-		opcion = controlDeMenu(" 1)Dar de Alta\n 2)Mostrar\n 3)Buscar\n 4)Eliminar\n 5)Abonar\n 6)Descontar\n 7)SALIDA  ",7);
+		opcion = controlDeMenu("\n1)Dar de Alta\n 2)Buscar\n 3)Abonar\n 4)Descontar\n 5)Mostrar\n 6)Eliminar\n 7)SALIDA\n\nEleccion: ",7);
 		
 		//Una vez que la opcion sea valida pasara a este switch
 		switch (opcion){
@@ -32,19 +32,19 @@ public class PrincipalBancaFI {
             darDeAlta();
             break;
         case 2:
-            Mostrar();
-            break;
-        case 3:
             Buscar();
             break;
-        case 4:
-            Eliminar();
-            break;
-        case 5:
+        case 3:
             Abonar();
             break;
-        case 6:
+        case 4:
             Descontar();
+            break;
+        case 5:
+            Mostrar();
+            break;
+        case 6:
+            Eliminar();
             break;
         case 7:
             break;    
@@ -64,7 +64,8 @@ public class PrincipalBancaFI {
         int telefono;
         String nombre, apellido;
         Double saldo;        
- 
+
+        System.out.println("\n");
         nombre = Teclado.cadena("Ingrese el Nombre del usuario: ");
         apellido = Teclado.cadena("Ingrese el Apellido del usuario: ");
         telefono =Teclado.entero("Ingrese el Telefono del Usuario: ");
@@ -72,7 +73,7 @@ public class PrincipalBancaFI {
  
         usuarioBancaFI temp = new usuarioBancaFI();
  
-        temp.setCod(cod); 
+        temp.setId(id); 
         temp.setNombre(nombre); 
         temp.setApellido(apellido);
         temp.setTelefono(telefono);
@@ -80,15 +81,16 @@ public class PrincipalBancaFI {
  
         usuario[contador] = temp;
         contador++;  
-        cod++;      
+        id++;      
     }
  
     public void Mostrar(){
  
         String ay="";
- 
+        
+        System.out.println("\n");
         for(int i=0; i<contador; i++){
-            ay+="Codigo: "+usuario[i].getCod()+"\n" + "Nombre: "+usuario[i].getNombre()+"\n" + "Apellido: "+usuario[i].getApellido()+"\n" + "Telefono: "+usuario[i].getTelefono()+"\n" + "Saldo: "+usuario[i].getSaldo()+"\n\n";        
+            ay+="ID: "+usuario[i].getId()+"\n" + "Nombre: "+usuario[i].getNombre()+"\n" + "Apellido: "+usuario[i].getApellido()+"\n" + "Telefono: "+usuario[i].getTelefono()+"\n" + "Saldo: "+usuario[i].getSaldo()+"\n\n";        
         }
         System.out.println(ay);
     }
@@ -96,13 +98,14 @@ public class PrincipalBancaFI {
     public void Abonar(){
         int c,b = 0;
         Double auxiliarAbono, abono;
- 
-        c=Teclado.entero("Digite el Codigo de usuario a buscar: ");
+        
+        System.out.println("\n");
+        c=Teclado.entero("Digite el ID de usuario a buscar: ");
             if(contador!=0)
             {
-                for(int i=0; i<contador; i++)
-                {
-                    if(usuario[i].getCod()==c)
+                for(int i=0; i<contador; i++)   //En estos dos metodos abonar y descontar, se realiza un barrido para buscar al usuario y ya que se encontro
+                {                               //Al usuario la variable auxiliar se le asigna el valor actual de la cuenta +/- el valor introducido por el usuario 
+                    if(usuario[i].getId()==c)
                     {
                         abono = Teclado.Double("Ingrese cantidad a abonar para el usuario "+usuario[i].getNombre()+" "+usuario[i].getApellido()+": ");
                         auxiliarAbono = usuario[i].getSaldo() + abono;
@@ -119,13 +122,14 @@ public class PrincipalBancaFI {
      public void Descontar(){
         int c,b = 0;
         Double auxiliarDescontar, descontar;
- 
-        c=Teclado.entero("Digite el Codigo de usuario a buscar: ");
+        
+        System.out.println("\n");
+        c=Teclado.entero("Digite el ID de usuario a buscar: ");
             if(contador!=0)
             {
                 for(int i=0; i<contador; i++)
                 {
-                    if(usuario[i].getCod()==c)
+                    if(usuario[i].getId()==c)
                     {
                         descontar = Teclado.Double("Ingrese cantidad a Descontar para el usuario "+usuario[i].getNombre()+" "+usuario[i].getApellido()+": ");
                         auxiliarDescontar = usuario[i].getSaldo() - descontar;
@@ -141,28 +145,29 @@ public class PrincipalBancaFI {
  
     public void Buscar(){
  
-        String ax = null;
+        String aux = null;
         int c,b = 0;
- 
-        c=Teclado.entero("Digite el Codigo de usuario a buscar: ");
+
+        System.out.println("\n");
+        c=Teclado.entero("Digite el ID de usuario a buscar: ");
             if(contador!=0)
             {
-                for(int i=0; i<contador; i++)
+                for(int i=0; i<contador; i++)       
                 {
-                    if(usuario[i].getCod()==c)
+                    if(usuario[i].getId()==c)
                     {
-                        ax="";
-                        ax+="Codigo: "+usuario[i].getCod()+"\n"
+                        aux="";
+                        aux+="ID: "+usuario[i].getId()+"\n"
                           + "Nombre: "+usuario[i].getNombre()+"\n"
-                          + "Apellido: "+usuario[i].getApellido()+"\n"
-                          + "Telefono: "+usuario[i].getTelefono()+"\n"
+                          + "Apellido: "+usuario[i].getApellido()+"\n"  //En este metodo al igual que en descontar y abonar se busca al usuario para despues 
+                          + "Telefono: "+usuario[i].getTelefono()+"\n"  //asignarle estos valores a una variable auxiliar e imprimirla
                           + "Saldo: "+usuario[i].getSaldo()+"\n";
                         b=1;
-                        System.out.println(ax);//Faltaba esta linea para imprimir el usuario buscado
+                        System.out.println(aux);//Faltaba esta linea para imprimir el usuario buscado
                     }
                 }
                 if(b==0)
-                System.out.println("Usuario "+ax+" no encontrado");
+                System.out.println("Usuario "+aux+" no encontrado");
             }
  
         }
@@ -172,27 +177,28 @@ public class PrincipalBancaFI {
     	//creando un arreglo temporal con un campo menos
         int c;
         usuarioBancaFI alumTemp[] = new usuarioBancaFI[contador-1];
+        System.out.println("\n");
  
-                        c = Teclado.entero("Digite el codigo del estudiante a eliminar: ");		//pidiendo el codigo a eliminar
-                        if(c<=contador)															//si el codigo a eliminar es menor o igual al contador de estudiantes
+                        c = Teclado.entero("Digite el ID del estudiante a eliminar: ");		
+                        if(c<=contador)															
                         { 		
-                            for(int i=0; i<contador; i++) 										//Inicio ciclo para realizar la eliminacion
+                            for(int i=0; i<contador; i++) 										
                             { 
-                                if(c == usuario[i].getCod()) //si el codigo a eliminar coincide con el codigo que hay en la posicion i
-                                    continue; 				 //entonces continua con el ciclo
+                                if(c == usuario[i].getId()) 
+                                    continue; 				 
                                 
                                 else{
-                                    if(usuario[i].getCod() < c)
-                                        alumTemp[i] = usuario[i];//si esl codigo es menor se almacena tal cual                     
-                                    if(usuario[i].getCod() > c){
-                                        usuario[i].setCod(i);//si el codigo es mayor se le resta para que quede en consecutivo
-                                        alumTemp[i-1] = usuario[i]; //se almacena con el nuevo codigo
+                                    if(usuario[i].getId() < c)
+                                        alumTemp[i] = usuario[i];
+                                    if(usuario[i].getId() > c){
+                                        usuario[i].setId(i);
+                                        alumTemp[i-1] = usuario[i]; 
                                     }
                                 }                                                                   
-                            } //Fin ciclo para realizar la eliminacion
-                            usuario=null; cod--; contador--; //se hacen las modificaciones para los nuevos valores                   
-                            usuario = new usuarioBancaFI[5]; //se vuelve a crear el arreglo 
-                            for(int i=0; i<alumTemp.length; i++){ //se almacenan los valores no eliminados
+                            } 
+                            usuario=null; id--; contador--; 
+                            usuario = new usuarioBancaFI[5]; 
+                            for(int i=0; i<alumTemp.length; i++){ 
                                 usuario[i]=alumTemp[i];
                             }                            
                         }
@@ -203,7 +209,7 @@ public class PrincipalBancaFI {
     
     public static void main(String[] args) {
         System.out.println("\n\n\n= = = = = = = = = = = = = = = = Bienvenido a BancaFI = = = = = = = = = = = = = = = =\n\n+ + Version 1.0\n+ + Team: Jaime Zayas\n          Rodolfo Castillo\n          Rodrigo Cedillo\n\n\n");    
-    	PrincipalBancaFI w = new PrincipalBancaFI(); //creacion del objeto w, llamado al constructor de la clase PrincipalBanco
+    	PrincipalBancaFI bancaFI = new PrincipalBancaFI(); //creamos bancaFi como objeto en la funcion principal
         System.exit(0);        
     }
 }

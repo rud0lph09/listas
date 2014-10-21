@@ -2,21 +2,21 @@ public class usuarioBancaFI {
     
 	
 	//Atributos
-	private int cod,telefono; 
+	private int id,telefono; 
     private String nombre, apellido;
     private Double saldo;
  
     
     //Setters y getters
-    public int getCod()
+    public int getId()
     {
-        return cod;
+        return id;
     }
  
 
-    public void setCod(int cod)
+    public void setId(int id)
     {
-        this.cod = cod;
+        this.id = id;
     }
  
  
