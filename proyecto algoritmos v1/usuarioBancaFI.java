@@ -2,7 +2,7 @@ public class usuarioBancaFI {
     
 	
 	//Atributos
-	private int id,telefono; 
+	private int id,telefono, idTipo, idGenero; 
     private String nombre, apellido;
     private Double saldo;
  
@@ -18,7 +18,28 @@ public class usuarioBancaFI {
     {
         this.id = id;
     }
+
+    public int getIdTipo()
+    {
+        return idTipo;
+    }
  
+
+    public void setIdTipo(int idTipo)
+    {
+        this.idTipo = idTipo;
+    }
+ 
+    public int getIdGenero()
+    {
+        return idGenero;
+    }
+ 
+
+    public void setIdGenero(int idGenero)
+    {
+        this.idGenero = idGenero;
+    }
  
     public String getNombre()
     {
