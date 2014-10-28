@@ -64,30 +64,43 @@ public class PrincipalBancaFI {
     public void darDeAlta(){        
  
         int telefono, idTipo, idGenero;
-        String nombre, apellido;
+        String nombre, apellido, seguir;
         Double saldo;        
 
         System.out.println("\n");
         idGenero = Teclado.entero("El Nuevo usuario es: \n1)Hombre  \n2)Mujer?\n\nEleccion:");
-        idTipo = Teclado.entero("Seleccione modo de registro:\n1)Inversionistas\n2)Usuarios\n\nEleccion:");
-        nombre = Teclado.cadena("Ingrese el Nombre del usuario: ");
-        apellido = Teclado.cadena("Ingrese el Apellido del usuario: ");
-        telefono =Teclado.entero("Ingrese el Telefono del Usuario: ");
-        saldo = Teclado.Double("Ingrese el Saldo inicial del Usuario: ");
+        if (idGenero >2) {
+            System.out.println("Opcion incorrecta...\nTendremos que reiniciar el registro del usuario...\n");
+            seguir = Teclado.cadena("\nPresiona enter para continuar.");
+            darDeAlta();
+        }else{
+            System.out.println("");
+            idTipo = Teclado.entero("Seleccione modo de registro:\n1)Inversionistas\n2)Usuarios\n\nEleccion:");
+        if (idTipo >2) {
+            System.out.println("Opcion incorrecta...\nTendremos que reiniciar el registro del usuario...\n");
+            seguir = Teclado.cadena("\nPresiona enter para continuar.");
+            darDeAlta();
+        }else{
+            System.out.println("");
+            nombre = Teclado.cadena("Ingrese el Nombre del usuario: ");
+            apellido = Teclado.cadena("Ingrese el Apellido del usuario: ");
+            telefono =Teclado.entero("Ingrese el Telefono del Usuario: ");
+            saldo = Teclado.Double("Ingrese el Saldo inicial del Usuario: ");
  
-        usuarioBancaFI temp = new usuarioBancaFI();
- 
-        temp.setId(id);
-        temp.setIdTipo(idTipo);
-        temp.setIdGenero(idGenero); 
-        temp.setNombre(nombre); 
-        temp.setApellido(apellido);
-        temp.setTelefono(telefono);
-        temp.setSaldo(saldo);        
- 
-        usuario[contador] = temp;
-        contador++;  
-        id++;      
+            usuarioBancaFI temp = new usuarioBancaFI();
+        
+            temp.setIdGenero(idGenero);
+            temp.setIdTipo(idTipo);
+            temp.setId(id);
+            temp.setNombre(nombre); 
+            temp.setApellido(apellido);
+            temp.setTelefono(telefono);
+            temp.setSaldo(saldo);
+            usuario[contador] = temp;
+            contador++;  
+            id++; 
+            }
+        }        
     }
  
     public void Mostrar(){
@@ -221,17 +234,18 @@ public class PrincipalBancaFI {
     public void Eliminar(){
     	
     	//creando un arreglo temporal con un campo menos
+        if(contador >=1){
         int c;
         usuarioBancaFI alumTemp[] = new usuarioBancaFI[contador-1];
         System.out.println("\n");
  
-                        c = Teclado.entero("Digite el ID del estudiante a eliminar: ");		
-                        if(c<=contador)															
-                        { 		
-                            for(int i=0; i<contador; i++) 										
+                        c = Teclado.entero("Digite el ID del estudiante a eliminar: ");     
+                        if(c<=contador)                                                         
+                        {       
+                            for(int i=0; i<contador; i++)                                       
                             { 
                                 if(c == usuario[i].getId()) 
-                                    continue; 				 
+                                    continue;                
                                 
                                 else{
                                     if(usuario[i].getId() < c)
@@ -249,12 +263,13 @@ public class PrincipalBancaFI {
                             }                            
                         }
                         else
-                            System.out.println("El estudiante a eliminar no existe !!!");
-        
+                            System.out.println("El estudiante a eliminar no existe !!!");    
+        }else
+        System.out.println("Error: No hay clientes registrados");    
     }
 
     public static void main(String[] args) {
-        System.out.println("\n\n\n= = = = = = = = = = = = = = = = Bienvenido a BancaFI = = = = = = = = = = = = = = = =\n\n+ + Version 2.0\n+ + Team: Jaime Zayas\n          Rodolfo Castillo\n          Rodrigo Cedillo\n\n\n\n\n\nTe recordamos que la ID del usuario esta en el siguiente formato:\n     id :tipo de usuario-genero");    
+        System.out.println("\n\n\n= = = = = = = = = = = = = = = = Bienvenido a BancaFI = = = = = = = = = = = = = = = =\n\n+ + Version 2.1\n+ + Team: Jaime Zayas\n          Rodolfo Castillo\n          Rodrigo Cedillo\n\n\n\n\n\nTe recordamos que la ID del usuario esta en el siguiente formato:\n     id :tipo de usuario-genero");    
         PrincipalBancaFI bancaFI = new PrincipalBancaFI();
         System.out.println("\nGracias por su preferencia\n");
         System.exit(0);        
