@@ -63,8 +63,8 @@ public class PrincipalBancaFI {
  
     public void darDeAlta(){        
  
-        int telefono, idTipo, idGenero;
-        String nombre, apellido, seguir;
+        int idTipo, idGenero, edad;
+        String telefono, nombre, apellido, seguir;
         Double saldo;        
 
         System.out.println("\n");
@@ -84,21 +84,37 @@ public class PrincipalBancaFI {
             System.out.println("");
             nombre = Teclado.cadena("Ingrese el Nombre del usuario: ");
             apellido = Teclado.cadena("Ingrese el Apellido del usuario: ");
-            telefono =Teclado.entero("Ingrese el Telefono del Usuario: ");
-            saldo = Teclado.Double("Ingrese el Saldo inicial del Usuario: ");
+            edad = Teclado.entero("Digite la edad del usuario:  ");
+            if(edad >=13){
+                telefono =Teclado.cadena("Ingrese el Telefono del Usuario: ");
+                saldo = Teclado.Double("Ingrese el Saldo inicial del Usuario: ");
  
-            usuarioBancaFI temp = new usuarioBancaFI();
-        
-            temp.setIdGenero(idGenero);
-            temp.setIdTipo(idTipo);
-            temp.setId(id);
-            temp.setNombre(nombre); 
-            temp.setApellido(apellido);
-            temp.setTelefono(telefono);
-            temp.setSaldo(saldo);
-            usuario[contador] = temp;
-            contador++;  
-            id++; 
+                if(idTipo==1){
+                    if(edad < 18){
+                        System.out.println("\nError: TODOS los inversionistas deben ser mayores de edad\nLe asignaremos al usuario una cuenta normal...");
+                        idTipo = 2;
+                        seguir = Teclado.cadena("\nPresiona enter para continuar.");
+                    }
+                }
+                usuarioBancaFI temp = new usuarioBancaFI();
+            
+                temp.setIdGenero(idGenero);
+                temp.setIdTipo(idTipo);
+                temp.setId(id);
+                temp.setNombre(nombre); 
+                temp.setApellido(apellido);
+                temp.setEdad(edad);
+                temp.setTelefono(telefono);
+                temp.setSaldo(saldo);
+                usuario[contador] = temp;
+                contador++;  
+                id++;    
+                }else{
+                    System.out.println("La edad ingresada no es valida.\nTe recordamos que los nuevos Clientes deben ser mayor a 13 años \nReiniciaremos el proceso de Registro de usuario...");
+                    seguir = Teclado.cadena("\nPresiona enter para continuar.");
+                    darDeAlta();
+                }
+             
             }
         }        
     }
@@ -109,7 +125,7 @@ public class PrincipalBancaFI {
         
         System.out.println("\n");
         for(int i=0; i<contador; i++){
-            ay+="ID: "+usuario[i].getId()+" :"+usuario[i].getIdTipo()+"-"+usuario[i].getIdGenero()+"\n" + "Nombre: "+usuario[i].getNombre()+"\n" + "Apellido: "+usuario[i].getApellido()+"\n" + "Telefono: "+usuario[i].getTelefono()+"\n" + "Saldo: "+usuario[i].getSaldo()+"\n\n";        
+            ay+="ID: "+usuario[i].getId()+" :"+usuario[i].getIdTipo()+"-"+usuario[i].getIdGenero()+"\n" + "Nombre: "+usuario[i].getNombre()+"\n" + "Apellido: "+usuario[i].getApellido()+"\n" +"Edad: "+usuario[i].getEdad()+ "\nTelefono: "+usuario[i].getTelefono()+"\n" + "Saldo: "+usuario[i].getSaldo()+"\n\n";        
         }
         System.out.println(ay);
     }
@@ -189,7 +205,7 @@ public class PrincipalBancaFI {
                     if(usuario[i].getId()==c)
                     {
                         aux="";
-                        aux+="ID: "+usuario[i].getId()+" :"+usuario[i].getIdTipo()+"-"+usuario[i].getIdGenero()+"\n"+ "Nombre: "+usuario[i].getNombre()+"\n"+ "Apellido: "+usuario[i].getApellido()+"\n"  + "Telefono: "+usuario[i].getTelefono()+"\n"+ "Saldo: "+usuario[i].getSaldo()+"\n";
+                        aux+="ID: "+usuario[i].getId()+" :"+usuario[i].getIdTipo()+"-"+usuario[i].getIdGenero()+"\n"+ "Nombre: "+usuario[i].getNombre()+"\n"+ "Apellido: "+usuario[i].getApellido()+"\n"  +"Edad: "+usuario[i].getEdad()+ "\nTelefono: "+usuario[i].getTelefono()+"\n"+ "Saldo: "+usuario[i].getSaldo()+"\n";
                         b=1;
                         System.out.println(aux);//Faltaba esta linea para imprimir el usuario buscado
                     }
@@ -201,14 +217,14 @@ public class PrincipalBancaFI {
         }
     public void doStats(){
         if (contador != 0) {
-        int usu = 0, inversion = 0, hom = 0, fem = 0, deudas = 0;
-        int i = 0, porchom = 0, porcfem = 0;
+        int usu = 0, inversion = 0, hom = 0, fem = 0, deudas = 0, groupEdad1=0, groupEdad2=0;
+        int i = 0;
         String mensaje = "";
         for (i=0;i<contador ;i++) {
             if(usuario[i].getIdTipo() != 1){
-                inversion += 1;
-            }else{
                 usu += 1;
+            }else{
+                inversion += 1;
             }
             if(usuario[i].getIdGenero() != 1){
                 fem += 1;
@@ -218,13 +234,16 @@ public class PrincipalBancaFI {
             if(usuario[i].getSaldo() < 0){
                 deudas += 1;
             }
+            if(usuario[i].getEdad() < 18){
+                groupEdad1 += 1;
+            }else{
+                groupEdad2 += 1;
+            }
         }
-        porchom =hom/contador;
-        porchom = porchom*100;
-        porcfem =fem/contador;
-        porcfem = porcfem*100;
-        mensaje +="Total de Clientes Registrados: "+contador+"\nTotal de Usuarios Normales:"+usu+"\nTotal de Inversionistas"+inversion+"\nDel Total de Clientes hay "+deudas+" deudores \ny el "+porchom+" porciento son hombres\ny el "+porcfem+" porciento son mujeres";
+        
+        mensaje +="Total de Clientes Registrados: "+contador+"\nTotal de Usuarios Normales:"+usu+"\nTotal de Inversionistas: "+inversion+"\nDel Total de Clientes hay "+deudas+" que son morosos \ny  "+hom+" son hombres\ny "+fem+" son mujeres";
         System.out.println(mensaje);
+        System.out.println("\nDel total de usuarios "+groupEdad1+" son menores de edad\ny "+groupEdad2+" son mayores de edad.");
     }
     else{
         System.out.println("Error: No se han registrado clientes");
@@ -269,7 +288,7 @@ public class PrincipalBancaFI {
     }
 
     public static void main(String[] args) {
-        System.out.println("\n\n\n= = = = = = = = = = = = = = = = Bienvenido a BancaFI = = = = = = = = = = = = = = = =\n\n+ + Version 2.1\n+ + Team: Jaime Zayas\n          Rodolfo Castillo\n          Rodrigo Cedillo\n\n\n\n\n\nTe recordamos que la ID del usuario esta en el siguiente formato:\n     id :tipo de usuario-genero");    
+        System.out.println("\n\n\n= = = = = = = = = = = = = = = = Bienvenido a BancaFI = = = = = = = = = = = = = = = =\n\n+ + Version 2.2\n+ + Team: Jaime Zayas\n          Rodolfo Castillo\n          Rodrigo Cedillo\n\n\n\n\n\nTe recordamos que la ID del usuario esta en el siguiente formato:\n     id :tipo de usuario-genero");    
         PrincipalBancaFI bancaFI = new PrincipalBancaFI();
         System.out.println("\nGracias por su preferencia\n");
         System.exit(0);        
